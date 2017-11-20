@@ -1,0 +1,18 @@
+import requests
+with open(r'C:\Users\Administrator\Desktop\phone.txt') as f:
+    ph=[]
+    for line in f.readline():
+        ph.append(f.readline().strip())
+dic={}
+for i in range(len(ph)):
+    querys='shouji='+ph[i]
+    url=url = host + path + '?' + querys
+    request=requests.get(url,headers=headers)
+    city=request.json()['result']['city']
+    dic[ph[i]]=city
+
+with open(r'C:\Users\Administrator\Desktop\backphone.txt','w+') as ff:
+    for key,value in dic.items():
+        ff.write(key+",")
+        ff.write(value)
+        ff.write('\n')
